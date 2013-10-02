@@ -7,9 +7,9 @@ package
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
  
-	public class SimpleTransitionManager
+	public class ShrinkAndFadeTransitionManager
 	{
-		public function ScreenSlidingStackTransitionManager(navigator:ScreenNavigator)
+		public function ShrinkAndFadeTransitionManager(navigator:ScreenNavigator)
 		{
 			//we'll need its dimensions later
 			this.navigator = navigator;
