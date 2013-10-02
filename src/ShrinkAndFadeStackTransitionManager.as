@@ -18,9 +18,8 @@ package feathers.motion.transitions
 	import starling.display.DisplayObject;
 
 	/**
-	 * A transition for <code>ScreenNavigator</code> that slides out the old
-	 * screen and slides in the new screen at the same time. The slide starts
-	 * from the right or left, depending on if the manager determines that the
+	 * A transition for <code>ScreenNavigator</code> that fades in or out
+	 * the top-most screen, depending on if the manager determines that the
 	 * transition is a push or a pop.
 	 *
 	 * <p>Whether a screen change is supposed to be a push or a pop is
