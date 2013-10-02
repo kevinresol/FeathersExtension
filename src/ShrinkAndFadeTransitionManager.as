@@ -149,11 +149,15 @@ package feathers.motion.transitions
 				this._savedCompleteHandler = null;
 				if(newScreen)
 				{
-					newScreen.x = 0;
+					newScreen.x = newScreen.y = 0;
+					newScreen.scaleX = newScreen.scaleY = 1;
+					newScreen.alpha = 1;
 				}
 				if(oldScreen)
 				{
-					oldScreen.x = 0;
+					oldScreen.x = oldScreen.y = 0;
+					oldScreen.scaleX = oldScreen.scaleY = 1;
+					oldScreen.alpha = 1;
 				}
 				if(onComplete != null)
 				{
