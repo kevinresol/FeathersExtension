@@ -214,7 +214,6 @@ package feathers.motion.transitions
 		protected function activeTransition_onComplete():void
 		{
 			this._activeTransition = null;
-			this._savedOtherTarget = null;
 			if(this._savedCompleteHandler != null)
 			{
 				this._savedCompleteHandler();
