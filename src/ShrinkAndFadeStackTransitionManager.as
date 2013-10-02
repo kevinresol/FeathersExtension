@@ -81,11 +81,6 @@ package feathers.motion.transitions
 		/**
 		 * @private
 		 */
-		protected var _savedOtherTarget:DisplayObject;
-
-		/**
-		 * @private
-		 */
 		protected var _savedCompleteHandler:Function;
 
 		/**
@@ -137,7 +132,6 @@ package feathers.motion.transitions
 		{
 			if(this._activeTransition)
 			{
-				this._savedOtherTarget = null;
 				Starling.juggler.remove(this._activeTransition);
 				this._activeTransition = null;
 			}
@@ -173,7 +167,6 @@ package feathers.motion.transitions
 				newScreenClassAndID += "~" + IScreen(newScreen).screenID;
 			}
 			var stackIndex:int = this._stack.indexOf(newScreenClassAndID);
-			var activeTransition_onUpdate:Function;
 			
 			if(stackIndex < 0) //push
 			{
@@ -190,7 +183,6 @@ package feathers.motion.transitions
 				newScreen.y = -this.navigator.height * 0.05;
 				newScreen.scaleX = newScreen.scaleY = 1.1;
 				newScreen.alpha = 0;
-				activeTransition_onUpdate = this.activeTransitionPush_onUpdate;
 				this._activeTransition = new Tween(newScreen, this.duration, this.ease);
 				this._activeTransition.animate("scaleX", 1);
 				this._activeTransition.animate("scaleY", 1);
@@ -204,7 +196,6 @@ package feathers.motion.transitions
 				newScreen.x = newScreen.y = oldScreen.x = oldScreen.y = 0;
 				newScreen.scaleX = newScreen.scaleY = oldScreen.scaleX = oldScreen.scaleY = 1;
 				newScreen.alpha = oldScreen.alpha = 1;
-				activeTransition_onUpdate = this.activeTransitionPop_onUpdate;
 				this._activeTransition = new Tween(oldScreen, this.duration, this.ease);
 				this._activeTransition.animate("scaleX", 1.1);
 				this._activeTransition.animate("scaleX", 1.1);
@@ -212,35 +203,9 @@ package feathers.motion.transitions
 				this._activeTransition.animate("y", -this.navigator.height * 0.05);
 				this._activeTransition.animate("alpha", 0);
 			}
-			this._savedOtherTarget = oldScreen;
 			this._activeTransition.delay = this.delay;
-			this._activeTransition.onUpdate = activeTransition_onUpdate;
 			this._activeTransition.onComplete = activeTransition_onComplete;
 			Starling.juggler.add(this._activeTransition);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function activeTransitionPush_onUpdate():void
-		{
-			/*if(this._savedOtherTarget)
-			{
-				const newScreen:DisplayObject = DisplayObject(this._activeTransition.target);
-				this._savedOtherTarget.x = newScreen.x - this.navigator.width;
-			}*/
-		}
-
-		/**
-		 * @private
-		 */
-		protected function activeTransitionPop_onUpdate():void
-		{
-			/*if(this._savedOtherTarget)
-			{
-				const newScreen:DisplayObject = DisplayObject(this._activeTransition.target);
-				this._savedOtherTarget.x = newScreen.x + this.navigator.width;
-			}*/
 		}
 
 		/**
