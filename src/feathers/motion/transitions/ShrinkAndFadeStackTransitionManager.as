@@ -20,7 +20,8 @@ package feathers.motion.transitions
 	/**
 	 * A transition for <code>ScreenNavigator</code> that fades in or out
 	 * the top-most screen, depending on if the manager determines that the
-	 * transition is a push or a pop.
+	 * transition is a push or a pop. (Just mimic the transition used by
+	 * Android version's WhatsApp)
 	 *
 	 * <p>Whether a screen change is supposed to be a push or a pop is
 	 * determined automatically. The manager generates an identifier from the
@@ -196,6 +197,7 @@ package feathers.motion.transitions
 				newScreen.x = newScreen.y = oldScreen.x = oldScreen.y = 0;
 				newScreen.scaleX = newScreen.scaleY = oldScreen.scaleX = oldScreen.scaleY = 1;
 				newScreen.alpha = oldScreen.alpha = 1;
+				this.navigator.addChild(oldScreen);
 				this._activeTransition = new Tween(oldScreen, this.duration, this.ease);
 				this._activeTransition.animate("scaleX", 1.1);
 				this._activeTransition.animate("scaleX", 1.1);
