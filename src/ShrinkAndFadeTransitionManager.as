@@ -185,9 +185,11 @@ package feathers.motion.transitions
 				}
 				this._stack.push(oldScreenClassAndID);
 				oldScreen.x = oldScreen.y = 0;
+				oldScreen.scaleX = oldScreen.scaleY = 1;
+				oldScreen.alpha = 1;
 				newScreen.scaleX = newScreen.scaleY = 1.1;
-				newScreen.x = -this.navigator.width * 0.1;
-				newScreen.y = -this.navigator.height * 0.1;
+				newScreen.x = -this.navigator.width * 0.05;
+				newScreen.y = -this.navigator.height * 0.05;
 				newScreen.alpha = 0;
 				activeTransition_onUpdate = this.activeTransitionPush_onUpdate;
 				this._activeTransition = new Tween(newScreen, this.duration, this.ease);
@@ -200,14 +202,15 @@ package feathers.motion.transitions
 			else //pop
 			{
 				this._stack.length = stackIndex;
-				newScreen.x = newScreen.y = 0;
-				oldScreen.x = oldScreen.y = 0;
+				newScreen.x = newScreen.y = oldScreen.x = oldScreen.y = 0;
+				newScreen.scaleX = newScreen.scaleY = oldScreen.scaleX = oldScreen.scaleY = 1;
+				newScreen.alpha = oldScreen.alpha = 1;
 				activeTransition_onUpdate = this.activeTransitionPop_onUpdate;
 				this._activeTransition = new Tween(oldScreen, this.duration, this.ease);
 				this._activeTransition.animate("scaleX", 1.1);
 				this._activeTransition.animate("scaleX", 1.1);
-				this._activeTransition.animate("x", -this.navigator.width * 0.1);
-				this._activeTransition.animate("y", -this.navigator.height * 0.1);
+				this._activeTransition.animate("x", -this.navigator.width * 0.05);
+				this._activeTransition.animate("y", -this.navigator.height * 0.05);
 				this._activeTransition.animate("alpha", 0);
 			}
 			this._savedOtherTarget = oldScreen;
