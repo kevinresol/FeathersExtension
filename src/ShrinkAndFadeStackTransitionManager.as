@@ -36,12 +36,12 @@ package feathers.motion.transitions
 	 *
 	 * @see feathers.controls.ScreenNavigator
 	 */
-	public class ShrinkAndFadeTransitionManager
+	public class ShrinkAndFadeStackTransitionManager
 	{
 		/**
 		 * Constructor.
 		 */
-		public function ShrinkAndFadeTransitionManager(navigator:ScreenNavigator, quickStackScreenClass:Class = null, quickStackScreenID:String = null)
+		public function ShrinkAndFadeStackTransitionManager(navigator:ScreenNavigator, quickStackScreenClass:Class = null, quickStackScreenID:String = null)
 		{
 			if(!navigator)
 			{
