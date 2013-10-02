@@ -171,7 +171,8 @@ package feathers.motion.transitions
 			}
 			var stackIndex:int = this._stack.indexOf(newScreenClassAndID);
 			var activeTransition_onUpdate:Function;
-			if(stackIndex < 0)
+			
+			if(stackIndex < 0) //push
 			{
 				var oldScreenClassAndID:String = getQualifiedClassName(oldScreen);
 				if(oldScreen is IScreen)
@@ -179,20 +180,33 @@ package feathers.motion.transitions
 					oldScreenClassAndID += "~" + IScreen(oldScreen).screenID;
 				}
 				this._stack.push(oldScreenClassAndID);
-				oldScreen.x = 0;
-				newScreen.x = this.navigator.width;
+				oldScreen.x = oldScreen.y = 0;
+				newScreen.scaleX = newScreen.scaleY = 1.1;
+				newScreen.x = -this.navigator.width * 0.1;
+				newScreen.y = -this.navigator.height * 0.1;
+				newScreen.alpha = 0;
 				activeTransition_onUpdate = this.activeTransitionPush_onUpdate;
+				this._activeTransition = new Tween(newScreen, this.duration, this.ease);
+				this._activeTransition.animate("scaleX", 1);
+				this._activeTransition.animate("scaleY", 1);
+				this._activeTransition.animate("x", 0);
+				this._activeTransition.animate("y", 0);
+				this._activeTransition.animate("alpha", 1);
 			}
-			else
+			else //pop
 			{
 				this._stack.length = stackIndex;
-				oldScreen.x = 0;
-				newScreen.x = -this.navigator.width;
+				newScreen.x = newScreen.y = 0;
+				oldScreen.x = oldScreen.y = 0;
 				activeTransition_onUpdate = this.activeTransitionPop_onUpdate;
+				this._activeTransition = new Tween(oldScreen, this.duration, this.ease);
+				this._activeTransition.animate("scaleX", 1.1);
+				this._activeTransition.animate("scaleX", 1.1);
+				this._activeTransition.animate("x", -this.navigator.width * 0.1);
+				this._activeTransition.animate("y", -this.navigator.height * 0.1);
+				this._activeTransition.animate("alpha", 0);
 			}
 			this._savedOtherTarget = oldScreen;
-			this._activeTransition = new Tween(newScreen, this.duration, this.ease);
-			this._activeTransition.animate("x", 0);
 			this._activeTransition.delay = this.delay;
 			this._activeTransition.onUpdate = activeTransition_onUpdate;
 			this._activeTransition.onComplete = activeTransition_onComplete;
@@ -204,11 +218,11 @@ package feathers.motion.transitions
 		 */
 		protected function activeTransitionPush_onUpdate():void
 		{
-			if(this._savedOtherTarget)
+			/*if(this._savedOtherTarget)
 			{
 				const newScreen:DisplayObject = DisplayObject(this._activeTransition.target);
 				this._savedOtherTarget.x = newScreen.x - this.navigator.width;
-			}
+			}*/
 		}
 
 		/**
@@ -216,11 +230,11 @@ package feathers.motion.transitions
 		 */
 		protected function activeTransitionPop_onUpdate():void
 		{
-			if(this._savedOtherTarget)
+			/*if(this._savedOtherTarget)
 			{
 				const newScreen:DisplayObject = DisplayObject(this._activeTransition.target);
 				this._savedOtherTarget.x = newScreen.x + this.navigator.width;
-			}
+			}*/
 		}
 
 		/**
