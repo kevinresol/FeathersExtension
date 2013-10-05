@@ -203,7 +203,7 @@ package feathers.motion.transitions
 				oldScreen.alpha = 1;
 				newScreen.x = -this.navigator.width * tweenX;
 				newScreen.y = -this.navigator.height * tweenY;
-				newScreen.scaleX = newScreen.scaleY = 1.1;
+				newScreen.scaleX = newScreen.scaleY = 1 + tweenScale;
 				newScreen.alpha = 0;
 				this._activeTransition = new Tween(newScreen, this.duration, this.ease);
 				this._activeTransition.animate("scaleX", 1);
