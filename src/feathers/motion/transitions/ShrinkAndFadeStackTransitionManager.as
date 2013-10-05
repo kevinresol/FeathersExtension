@@ -114,7 +114,28 @@ package feathers.motion.transitions
 		 * @default false
 		 */
 		public var skipNextTransition:Boolean = false;
-
+	
+		/**
+		 * The scale the screen will expand
+		 *
+		 * @default 0.1
+		 */
+		public var tweenScale:Number = 0.1;
+		
+		/**
+		 * The x position the screen will shift
+		 *
+		 * @default 0.05
+		 */
+		public var tweenX:Number = 0.05;
+		
+		/**
+		 * The y position the screen will shift
+		 *
+		 * @default 0.02
+		 */
+		public var tweenY:Number = 0.02;
+		
 		/**
 		 * Removes all saved classes from the stack that are used to determine
 		 * which side of the <code>ScreenNavigator</code> the new screen will
@@ -180,8 +201,8 @@ package feathers.motion.transitions
 				oldScreen.x = oldScreen.y = 0;
 				oldScreen.scaleX = oldScreen.scaleY = 1;
 				oldScreen.alpha = 1;
-				newScreen.x = -this.navigator.width * 0.05;
-				newScreen.y = -this.navigator.height * 0.05;
+				newScreen.x = -this.navigator.width * tweenX;
+				newScreen.y = -this.navigator.height * tweenY;
 				newScreen.scaleX = newScreen.scaleY = 1.1;
 				newScreen.alpha = 0;
 				this._activeTransition = new Tween(newScreen, this.duration, this.ease);
@@ -199,10 +220,10 @@ package feathers.motion.transitions
 				newScreen.alpha = oldScreen.alpha = 1;
 				this.navigator.addChild(oldScreen);
 				this._activeTransition = new Tween(oldScreen, this.duration, this.ease);
-				this._activeTransition.animate("scaleX", 1.1);
-				this._activeTransition.animate("scaleX", 1.1);
-				this._activeTransition.animate("x", -this.navigator.width * 0.05);
-				this._activeTransition.animate("y", -this.navigator.height * 0.05);
+				this._activeTransition.animate("scaleX", 1 + tweenScale);
+				this._activeTransition.animate("scaleX", 1 + tweenScale);
+				this._activeTransition.animate("x", -this.navigator.width * tweenX);
+				this._activeTransition.animate("y", -this.navigator.height * tweenY);
 				this._activeTransition.animate("alpha", 0);
 			}
 			this._activeTransition.delay = this.delay;
